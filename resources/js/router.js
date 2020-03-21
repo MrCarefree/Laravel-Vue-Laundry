@@ -15,7 +15,7 @@ const router = new Router({
             path: '/',
             name: 'home',
             component: Home,
-            meta: { requiresAuth: true }
+            meta: {requiresAuth: true}
         },
         {
             path: '/login',
@@ -29,7 +29,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         let auth = store.getters.isAuth
-        !auth ? next({ name: 'login' }) : next()
+        !auth ? next({name: 'login'}) : next()
     } else next()
 })
 

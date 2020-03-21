@@ -1,25 +1,33 @@
 <template>
-  <div class="wrapper">
-    <app-header v-if="isAuth" />
+    <div class="wrapper" v-if="isAuth">
+        <app-navbar/>
+        <app-sidebar/>
 
-    <div class="content-wrapper">
-      <router-view></router-view>
+        <div class="content-wrapper">
+            <router-view></router-view>
+        </div>
+        <app-footer/>
     </div>
-    <app-footer v-if="isAuth" />
-  </div>
+    <div class="d-flex align-items-center justify-content-center vh-100 bg-light" v-else>
+        <router-view></router-view>
+    </div>
 </template>
+
 <script>
-import { mapState, mapGetters } from "vuex";
-import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
-export default {
-  computed: {
-    ...mapState(["token"]),
-    ...mapGetters(["isAuth"])
-  },
-  components: {
-    "app-header": Header,
-    "app-footer": Footer
-  }
-};
+    import {mapState, mapGetters} from "vuex";
+    import Footer from "./components/Footer.vue";
+    import Navbar from "./components/Navbar.vue";
+    import Sidebar from "./components/Sidebar.vue";
+
+    export default {
+        computed: {
+            ...mapState(["token"]),
+            ...mapGetters(["isAuth"])
+        },
+        components: {
+            "app-footer": Footer,
+            "app-navbar": Navbar,
+            "app-sidebar": Sidebar
+        }
+    };
 </script>
